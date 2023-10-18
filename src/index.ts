@@ -29,13 +29,14 @@ export async function markdownToBlocks(
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
+    "'": "'",
   };
 
   const tokenizer: TokenizerObject = {
     inlineText(src: string) {
-      const match = src.match(/[&<>]/g);
+      const match = src.match(/[&<>']/g);
       if (match) {
-        const text = src.replace(/[&<>]/g, char => {
+        const text = src.replace(/[&<>']/g, char => {
           return replacements[char];
         });
         return {

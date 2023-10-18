@@ -139,4 +139,16 @@ if (a === 'hi') {
     const expected = [slack.section("`'YOUR_API_KEY'`")];
     expect(actual).toStrictEqual(expected);
   });
+
+  it('should correctly parse inline code with single quotes', async () => {
+    const text =
+      "Remember to replace `'YOUR_API_KEY'` with your actual API key and `'test@test.io'` with the current user's email.";
+    const actual = await markdownToBlocks(text);
+    const expected = [
+      slack.section(
+        "Remember to replace `'YOUR_API_KEY'` with your actual API key and `'test@test.io'` with the current user's email."
+      ),
+    ];
+    expect(actual).toStrictEqual(expected);
+  });
 });
